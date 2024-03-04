@@ -9,6 +9,7 @@ import { AppDummy } from "./app.dummy";
 import { ConfigModule } from "@nestjs/config";
 import ormConfig from "./config/orm.config";
 import ormConfigProd from "./config/orm.config.prod";
+import { SchoolModule } from "./school/school.module";
 
 @Module({
     imports: [
@@ -16,28 +17,30 @@ import ormConfigProd from "./config/orm.config.prod";
             isGlobal: true,
             envFilePath: ".env",
             load: [ormConfig],
-            expandVariables: true
+            expandVariables: true,
         }),
         TypeOrmModule.forRootAsync({
-            useFactory: process.env.NODE_ENV !== "production" ? ormConfig : ormConfigProd
+            useFactory: process.env.NODE_ENV !== "production" ? ormConfig : ormConfigProd,
         }),
         EventsModule,
+        SchoolModule,
     ],
     controllers: [AppController],
     providers: [
         {
             provide: AppService,
-            useClass: AppJapanService
+            useClass: AppJapanService,
         },
         {
             provide: "APP_NAME",
-            useValue: "NEST EVENTS BACKEND!"
+            useValue: "NEST EVENTS BACKEND!",
         },
         {
             provide: "MESSAGE",
             inject: [AppDummy],
-            useFactory: (app) => `${app.dummy()} Factory!`
-        }, AppDummy
+            useFactory: (app) => `${app.dummy()} Factory!`,
+        },
+        AppDummy,
     ],
 })
 export class AppModule {}
