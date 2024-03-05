@@ -1,10 +1,15 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Attendee } from './attendee.entity';
+import { Attendee } from "./attendee.entity";
 import { User } from "src/auth/user.entity";
 import { Expose } from "class-transformer";
+import { PaginationResult } from "src/pagination/paginator";
 
 @Entity()
 export class Event {
+    constructor(partial: Partial<Event>) {
+        Object.assign(this, partial);
+    }
+
     @PrimaryGeneratedColumn()
     @Expose()
     id: number;
@@ -32,7 +37,7 @@ export class Event {
     attendees: Attendee[];
 
     @ManyToOne(() => User, (user) => user.organized)
-    @JoinColumn({name: "organizerId"})
+    @JoinColumn({ name: "organizerId" })
     @Expose()
     organizer: User;
 
@@ -48,3 +53,5 @@ export class Event {
     @Expose()
     attendeeAccepted?: number;
 }
+
+export type PaginatedEvents = PaginationResult<Event>;

@@ -32,19 +32,16 @@ import { AuthGuardJwt } from "src/auth/auth-guard.jwt";
 export class EventsController {
     private readonly logger = new Logger(EventsController.name);
 
-    constructor(
-        private readonly eventsService: EventsService
-    ) {}
+    constructor(private readonly eventsService: EventsService) {}
 
     @Get()
-    @UsePipes(new ValidationPipe( { transform: true } ))
+    @UsePipes(new ValidationPipe({ transform: true }))
     @UseInterceptors(ClassSerializerInterceptor)
     async findAll(@Query() filter: ListEvents) {
-        this.logger.debug(`Hit the findAll route`);
         const events = await this.eventsService.getEventsWithAttendeeCountFilteredPaginated(filter, {
             total: true,
             currentPage: filter.page,
-            limit: 10
+            limit: 10,
         });
         this.logger.debug(`Found ${events} events`);
         return events;
@@ -88,7 +85,7 @@ export class EventsController {
     @Get(":id")
     @UseInterceptors(ClassSerializerInterceptor)
     async findOne(@Param("id", ParseIntPipe) id) {
-        const event = await this.eventsService.getEvent(id);
+        const event = await this.eventsService.getEventWithAttendeeCount(id);
         if (!event) {
             throw new NotFoundException();
         }
@@ -106,7 +103,7 @@ export class EventsController {
     @UseGuards(AuthGuardJwt)
     @UseInterceptors(ClassSerializerInterceptor)
     async update(@Param("id", ParseIntPipe) id, @Body() input: UpdateEventDto, @CurrentUser() user: User) {
-        const event = await this.eventsService.getEvent(id);
+        const event = await this.eventsService.findOne(id);
         if (!event) {
             throw new NotFoundException();
         }
@@ -122,7 +119,7 @@ export class EventsController {
     @UseGuards(AuthGuardJwt)
     @HttpCode(204)
     async remove(@Param("id", ParseIntPipe) id, @CurrentUser() user: User) {
-        const event = await this.eventsService.getEvent(id);
+        const event = await this.eventsService.findOne(id);
         if (!event) {
             throw new NotFoundException();
         }

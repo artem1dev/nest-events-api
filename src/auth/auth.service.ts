@@ -5,17 +5,13 @@ import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private readonly jwtService: JwtService,
-    ){
-
-    }
+    constructor(private readonly jwtService: JwtService) {}
 
     public getTokenForUser(user: User): string {
         return this.jwtService.sign({
             username: user.username,
-            sub: user.id
-        })
+            sub: user.id,
+        });
     }
 
     public async hashPassword(password: string): Promise<string> {
