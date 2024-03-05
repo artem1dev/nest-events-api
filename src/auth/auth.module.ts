@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "./user.entity";
-import { LocalStrategy } from "./local.strategy";
-import { AuthController } from "./auth.controller";
+import { User } from "./entities/user.entity";
+import { LocalStrategy } from "./strategies/local.strategy";
+import { AuthController } from "./controllers/auth.controller";
 import { JwtModule } from "@nestjs/jwt";
-import { JwtStrategy } from "./jwt.strategy";
-import { UsersController } from "./users.controller";
+import { JwtStrategy } from "./strategies/jwt.strategy";
+import { UsersController } from "./controllers/users.controller";
 import { AuthService } from "./auth.service";
 
 @Module({

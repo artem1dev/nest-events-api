@@ -1,5 +1,5 @@
-import { CreateEventDto } from "./input/create-event.dto";
-import { UpdateEventDto } from "./input/update-event.dto";
+import { CreateEventDto } from "../dto/input/create-event.dto";
+import { UpdateEventDto } from "../dto/input/update-event.dto";
 import {
     Controller,
     Get,
@@ -21,11 +21,11 @@ import {
     UseInterceptors,
     ClassSerializerInterceptor,
 } from "@nestjs/common";
-import { EventsService } from "./event.service";
-import { ListEvents } from "./input/list.events";
+import { EventsService } from "../services/event.service";
+import { ListEvents } from "../dto/input/list.events";
 import { CurrentUser } from "src/auth/current-user.decorator";
-import { User } from "src/auth/user.entity";
-import { AuthGuardJwt } from "src/auth/auth-guard.jwt";
+import { User } from "src/auth/entities/user.entity";
+import { AuthGuardJwt } from "src/auth/guards/auth-guard.jwt";
 
 @Controller("/events")
 @SerializeOptions({ strategy: "excludeAll" })

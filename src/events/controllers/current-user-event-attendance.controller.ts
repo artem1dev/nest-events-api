@@ -13,12 +13,12 @@ import {
     UseGuards,
     UseInterceptors,
 } from "@nestjs/common";
-import { EventsService } from "./event.service";
-import { AttendeesService } from "./attendees.service";
-import { AuthGuardJwt } from "src/auth/auth-guard.jwt";
+import { EventsService } from "../services/event.service";
+import { AttendeesService } from "../services/attendees.service";
+import { AuthGuardJwt } from "src/auth/guards/auth-guard.jwt";
 import { CurrentUser } from "src/auth/current-user.decorator";
-import { User } from "src/auth/user.entity";
-import { CreateAttendeeDto } from "./create-attendee.dto";
+import { User } from "src/auth/entities/user.entity";
+import { CreateAttendeeDto } from "../dto/create-attendee.dto";
 
 @Controller("events-attendance")
 @SerializeOptions({ strategy: "excludeAll" })

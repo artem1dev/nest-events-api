@@ -1,8 +1,7 @@
 import { Repository } from "typeorm";
-import { Attendee } from "./attendee.entity";
+import { Attendee } from "../entities/attendee.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable } from "@nestjs/common";
-import { use } from "passport";
 
 @Injectable()
 export class AttendeesService {
