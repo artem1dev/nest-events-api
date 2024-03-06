@@ -9,14 +9,13 @@ import { AppDummy } from "./app.dummy";
 import { ConfigModule } from "@nestjs/config";
 import ormConfig from "./config/orm.config";
 import ormConfigProd from "./config/orm.config.prod";
-import { SchoolModule } from "./school/school.module";
 import { AuthModule } from "./auth/auth.module";
 
 @Module({
     imports: [
         ConfigModule.forRoot({
             isGlobal: true,
-            envFilePath: ".env",
+            envFilePath: `${process.env.NODE_ENV}.env`,
             load: [ormConfig],
             expandVariables: true,
         }),
@@ -25,7 +24,6 @@ import { AuthModule } from "./auth/auth.module";
         }),
         AuthModule,
         EventsModule,
-        SchoolModule,
     ],
     controllers: [AppController],
     providers: [

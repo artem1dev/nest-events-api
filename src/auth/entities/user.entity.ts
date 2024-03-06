@@ -1,11 +1,15 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Profile } from "./profile.entity";
-import { Event } from "src/events/entities/event.entity";
+import { Event } from "./../../events/entities/event.entity";
 import { Expose } from "class-transformer";
-import { Attendee } from "src/events/entities/attendee.entity";
+import { Attendee } from "./../../events/entities/attendee.entity";
 
 @Entity()
 export class User {
+    constructor(partial?: Partial<User>) {
+        Object.assign(this, partial);
+    }
+
     @PrimaryGeneratedColumn()
     @Expose()
     id: number;

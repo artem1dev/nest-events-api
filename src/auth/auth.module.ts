@@ -20,7 +20,7 @@ import { AuthService } from "./auth.service";
             }),
         }),
     ],
-    providers: [LocalStrategy, JwtStrategy, AuthService],
     controllers: [AuthController, UsersController],
+    providers: [LocalStrategy, JwtStrategy, AuthService],
 })
 export class AuthModule {}

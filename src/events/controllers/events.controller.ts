@@ -23,11 +23,11 @@ import {
 } from "@nestjs/common";
 import { EventsService } from "../services/event.service";
 import { ListEvents } from "../dto/input/list.events";
-import { CurrentUser } from "src/auth/current-user.decorator";
-import { User } from "src/auth/entities/user.entity";
-import { AuthGuardJwt } from "src/auth/guards/auth-guard.jwt";
+import { CurrentUser } from "./../../auth/current-user.decorator";
+import { User } from "./../../auth/entities/user.entity";
+import { AuthGuardJwt } from "./../../auth/guards/auth-guard.jwt";
 
-@Controller("/events")
+@Controller("events")
 @SerializeOptions({ strategy: "excludeAll" })
 export class EventsController {
     private readonly logger = new Logger(EventsController.name);
@@ -41,7 +41,7 @@ export class EventsController {
         const events = await this.eventsService.getEventsWithAttendeeCountFilteredPaginated(filter, {
             total: true,
             currentPage: filter.page,
-            limit: 10,
+            limit: filter.limit,
         });
         this.logger.debug(`Found ${events} events`);
         return events;

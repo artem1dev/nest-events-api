@@ -4,9 +4,9 @@ import { Event, PaginatedEvents } from "../entities/event.entity";
 import { Injectable, Logger } from "@nestjs/common";
 import { AttendeeAnswerEnum } from "../entities/attendee.entity";
 import { ListEvents, WhenEventFilter } from "../dto/input/list.events";
-import { PaginateOptions, paginate } from "src/pagination/paginator";
+import { PaginateOptions, paginate } from "./../../pagination/paginator";
 import { CreateEventDto } from "../dto/input/create-event.dto";
-import { User } from "src/auth/entities/user.entity";
+import { User } from "./../../auth/entities/user.entity";
 import { UpdateEventDto } from "../dto/input/update-event.dto";
 
 @Injectable()
@@ -74,11 +74,7 @@ export class EventsService {
     }
 
     public async findOne(id: number): Promise<Event | undefined> {
-        return await this.eventsRepository.findOne({
-            where: {
-                id: id,
-            },
-        });
+        return await this.eventsRepository.findOneBy({ id: id });
     }
 
     public async createEvent(input: CreateEventDto, user: User): Promise<Event> {
