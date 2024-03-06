@@ -1,10 +1,6 @@
 # Event Manager
 
-This project is an event manager built using `NestJs`. It was created with the aim of enhancing my understanding of `NestJs` while tackling a challenging and complex task. The backend for events in this application follows a simple yet effective concept.
-
-## Motivation
-
-My primary motivation for embarking on this project was to deepen my knowledge of `NestJs`. I believed that building an event manager would provide me with the opportunity to explore various aspects of `NestJs` in a practical and hands-on manner. Additionally, I was drawn to the challenge and complexity that such a project would entail.
+This project is an event manager built using `NestJs`. It was created to enhance my understanding of `NestJs` while tackling a challenging and complex task. The backend for events in this application follows a simple yet effective concept.
 
 ## Technologies Used
 
