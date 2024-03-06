@@ -1,14 +1,14 @@
 import { INestApplication, ValidationPipe } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
-import { Connection } from "typeorm";
+import { DataSource } from "typeorm";
 import { AppModule } from "../src/app.module";
 import { loadFixtures as loadFixturesBase, tokenForUser as tokenForUserBase } from "./utils";
 import { User } from "../src/auth/entities/user.entity";
 
 let app: INestApplication;
 let mod: TestingModule;
-let connection: Connection;
+let connection: DataSource;
 
 const loadFixtures = async (sqlFileName: string) => loadFixturesBase(connection, sqlFileName);
 
@@ -30,7 +30,7 @@ describe("Auth (e2e)", () => {
 
         await app.init();
 
-        connection = app.get(Connection);
+        connection = app.get(DataSource);
     });
 
     afterEach(async () => {

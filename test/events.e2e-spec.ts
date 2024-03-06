@@ -1,14 +1,14 @@
 import { INestApplication, ValidationPipe } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
-import { Connection } from "typeorm";
+import { DataSource } from "typeorm";
 import { AppModule } from "../src/app.module";
 import { User } from "../src/auth/entities/user.entity";
 import { loadFixtures as loadFixturesBase, tokenForUser as tokenForUserBase } from "./utils";
 
 let app: INestApplication;
 let mod: TestingModule;
-let connection: Connection;
+let connection: DataSource;
 
 const loadFixtures = async (sqlFileName: string) => {
     await loadFixturesBase(connection, sqlFileName);
@@ -29,7 +29,7 @@ beforeEach(async () => {
     app.useGlobalPipes(new ValidationPipe());
     await app.init();
 
-    connection = app.get(Connection);
+    connection = app.get(DataSource);
 });
 afterEach(async () => {
     await app.close();
@@ -85,8 +85,10 @@ describe("Events (e2e)", () => {
                         "The name length is wrong",
                         "name must be a string",
                         "description must be longer than or equal to 5 characters",
+                        "description must be a string",
                         "when must be a valid ISO 8601 date string",
                         "address must be longer than or equal to 5 characters",
+                        "address must be a string",
                     ],
                     error: "Bad Request",
                 });

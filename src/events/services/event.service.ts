@@ -74,11 +74,7 @@ export class EventsService {
     }
 
     public async findOne(id: number): Promise<Event | undefined> {
-        return await this.eventsRepository.findOne({
-            where: {
-                id: id,
-            },
-        });
+        return await this.eventsRepository.findOneBy({id: id});
     }
 
     public async createEvent(input: CreateEventDto, user: User): Promise<Event> {
