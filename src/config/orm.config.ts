@@ -1,11 +1,11 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { registerAs } from "@nestjs/config";
-import { Event } from "src/events/entities/event.entity";
-import { Attendee } from "src/events/entities/attendee.entity";
-import { Subject } from "src/school/subject.entity";
-import { Teacher } from "src/school/teacher.entity";
-import { User } from "src/auth/entities/user.entity";
-import { Profile } from "src/auth/entities/profile.entity";
+import { Event } from "./../events/entities/event.entity";
+import { Attendee } from "./../events/entities/attendee.entity";
+import { Subject } from "./../school/subject.entity";
+import { Teacher } from "./../school/teacher.entity";
+import { User } from "./../auth/entities/user.entity";
+import { Profile } from "./../auth/entities/profile.entity";
 
 export default registerAs(
     "orm.config",
@@ -18,5 +18,6 @@ export default registerAs(
         database: process.env.DB_NAME,
         entities: [Event, Attendee, Subject, Teacher, User, Profile],
         synchronize: true,
+        dropSchema: Boolean(process.env.DB_DROP_SCHEMA)
     }),
 );
