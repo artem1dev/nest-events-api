@@ -1,4 +1,4 @@
-import { INestApplication, ValidationPipe } from "@nestjs/common";
+import { HttpStatus, INestApplication, ValidationPipe } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
 import * as request from "supertest";
 import { DataSource } from "typeorm";
@@ -159,7 +159,7 @@ describe("Events (e2e)", () => {
         return request(app.getHttpServer())
             .delete("/events/1")
             .set("Authorization", `Bearer ${tokenForUser()}`)
-            .expect(204)
+            .expect(HttpStatus.NO_CONTENT)
             .then(() => {
                 return request(app.getHttpServer()).get("/events/1").expect(404);
             });

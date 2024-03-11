@@ -16,6 +16,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     ) {
         super();
     }
+    
     public async validate(username: string, password: string): Promise<any> {
         const user = await this.userRepository.findOne({
             where: { username },

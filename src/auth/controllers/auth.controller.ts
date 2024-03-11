@@ -28,8 +28,8 @@ export class AuthController {
     }
 
     @Get("profile")
-    @UseGuards(AuthGuardJwt)
     @UseInterceptors(ClassSerializerInterceptor)
+    @UseGuards(AuthGuardJwt)
     async getProfile(@CurrentUser() user: User) {
         return user;
     }

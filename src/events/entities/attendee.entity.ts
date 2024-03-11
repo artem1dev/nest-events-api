@@ -20,10 +20,6 @@ export class Attendee {
         onDelete: "CASCADE",
     })
     @JoinColumn()
-    //     {
-    //     name: "event_id",
-    //     referencedColumnName: "secondary"
-    // }
     event: Event;
 
     @Column()

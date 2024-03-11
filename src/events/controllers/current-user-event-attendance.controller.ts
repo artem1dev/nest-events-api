@@ -19,6 +19,7 @@ import { AuthGuardJwt } from "./../../auth/guards/auth-guard.jwt";
 import { CurrentUser } from "./../../auth/current-user.decorator";
 import { User } from "./../../auth/entities/user.entity";
 import { CreateAttendeeDto } from "../dto/create-attendee.dto";
+import { LIMIT } from "src/config/constants";
 
 @Controller("events-attendance")
 @SerializeOptions({ strategy: "excludeAll" })
@@ -34,7 +35,7 @@ export class CurrentUserEventAttendanceController {
     async findAll(@CurrentUser() user: User, @Query("page", new DefaultValuePipe(1), ParseIntPipe) page = 1) {
         return await this.eventsService.getEventsOrganizedByUserIdPaginated(user.id, {
             currentPage: page,
-            limit: 6,
+            limit: LIMIT,
         });
     }
 

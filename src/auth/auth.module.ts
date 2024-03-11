@@ -7,17 +7,13 @@ import { JwtModule } from "@nestjs/jwt";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { UsersController } from "./controllers/users.controller";
 import { AuthService } from "./auth.service";
+import JWT_CONFIG from "../config/jwt.config";
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([User]),
         JwtModule.registerAsync({
-            useFactory: () => ({
-                secret: process.env.JWT_SECRET,
-                signOptions: {
-                    expiresIn: "60m",
-                },
-            }),
+            useFactory: JWT_CONFIG,
         }),
     ],
     controllers: [AuthController, UsersController],
