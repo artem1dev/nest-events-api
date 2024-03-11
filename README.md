@@ -46,8 +46,16 @@ The repository includes an `Example.env` file. You should create the following e
 - `prod.env`: Used during production (`npm run start:prod`)
 - `e2e.env`: Used during end-to-end testing (`npm run test:e2e`)
 
-You can use the `Example.env` file as a template.
-
+You can use the `example.env` file as a template.
+DB_HOST - String: Host of database
+DB_PORT - Number: PORT of database
+DB_USER - String: Username of user in database
+DB_PASSWORD - String: Password of user in database
+DB_NAME - String: Name of database
+DB_DROP_SCHEMA - Boolean: 1 Or 0 - Drop database at start
+JWT_EXPIRES_IN - String: JWT token expires in
+JWT_SECRET - String: JWT secret key
+PORT - Number: Port of application
 ## Running the Application
 
 To run the application, use the following commands:
